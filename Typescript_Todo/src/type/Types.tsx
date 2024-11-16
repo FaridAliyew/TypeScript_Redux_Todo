@@ -4,5 +4,6 @@ export interface TodoInitialState {
 
 export interface TodoType {
     id: number,
-    content: string
+    content: string,
+    completed: boolean;
 }

@@ -2,27 +2,30 @@ import { useState } from "react";
 import { useDispatch } from "react-redux"
 import { createTodo } from "../redux/TodoSlice";
 import { TodoType } from "../type/Types";
+import '../style/todoCreate.css';
 
 function TodoCreat() {
 
   const dispatch = useDispatch();
   const [newTodo, setNewTodo] = useState<string>('');
 
-  const handleCreateTodo = () => {
-    if (newTodo.trim().length == 0) {
-      alert('Bir todo girin');
+  const handleCreateTodo = (e: React.FormEvent) => {
+    e.preventDefault(); 
+    if (newTodo.trim().length === 0) {
+      alert('Add Todo');
       return;
     }
-
-    const payload:TodoType = {
+  
+    const payload: TodoType = {
       id: Math.floor(Math.random() * 99999999),
-      content: newTodo
-    }
-
-    dispatch(createTodo(payload))
-    setNewTodo('')
-  }
-
+      content: newTodo,
+      completed: false,
+    };
+  
+    dispatch(createTodo(payload));
+    setNewTodo('');
+  };
+  
   return (
     <div className="todo-create">
       <form>
